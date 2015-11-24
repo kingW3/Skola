@@ -105,92 +105,92 @@ ReWrite(UceniciFile);
 end;
 // izbrisi predmet koji je selektovan
 procedure TForm2.Button2Click(Sender: TObject);
-begin
-DeleteRow(StringGrid1,Predmeti.ItemIndex);
-Predmeti.Items.Delete(Predmeti.ItemIndex);
-end;
+  begin
+    DeleteRow(StringGrid1,Predmeti.ItemIndex);
+    Predmeti.Items.Delete(Predmeti.ItemIndex);
+  end;
 //dodaj predmet iz Edit1.Text
 procedure TForm2.Button1Click(Sender: TObject);
-begin
-Predmeti.Items.Add(Edit1.Text);
-StringGrid1.ColCount:=StringGrid1.ColCount+1;
-StringGrid1.Cells[StringGrid1.ColCount-1,0]:=Predmeti.Items.Strings[Predmeti.Items.Count-1];
-end;
+  begin
+    Predmeti.Items.Add(Edit1.Text);
+    StringGrid1.ColCount:=StringGrid1.ColCount+1;
+		StringGrid1.Cells[StringGrid1.ColCount-1,0]:=Predmeti.Items.Strings[Predmeti.Items.Count-1];
+	end;
 //Ubaci predmete iz liste u StringGrid
 procedure TForm2.Button3Click(Sender: TObject);
-var brojac : integer;
-begin
-for brojac:=0 to Predmeti.Items.Count-1
-do
-begin
-StringGrid1.Rows[0][brojac+1]:=Predmeti.Items.Strings[brojac];
-end;
-end;
+	var brojac : integer;
+	begin
+		for brojac:=0 to Predmeti.Items.Count-1
+		do
+			begin
+				StringGrid1.Rows[0][brojac+1]:=Predmeti.Items.Strings[brojac];
+			end;
+	end;
 //Ako je broj 1 u celiji onda ga oboji u crveno ako je 0 u sivo
 procedure TForm2.StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
   Rect: TRect; State: TGridDrawState);
-begin
-if StringGrid1.Cells[ACol,ARow]='1' then
-begin
-StringGrid1.Canvas.Brush.Color:=clRed;
-StringGrid1.Canvas.FillRect(Rect);
-StringGrid1.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2, StringGrid1.Cells[acol, arow]);
-end;
-if StringGrid1.Cells[ACol,ARow]='0' then
-begin
-StringGrid1.Canvas.Brush.Color:=clGray;
-StringGrid1.Canvas.FillRect(Rect);
-StringGrid1.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2, StringGrid1.Cells[acol, arow]);
-end
-end;
+	begin
+		if StringGrid1.Cells[ACol,ARow]='1' then
+			begin
+				StringGrid1.Canvas.Brush.Color:=clRed;
+				StringGrid1.Canvas.FillRect(Rect);
+				StringGrid1.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2, StringGrid1.Cells[acol, arow]);
+			end;
+		if StringGrid1.Cells[ACol,ARow]='0' then
+			begin
+				StringGrid1.Canvas.Brush.Color:=clGray;
+				StringGrid1.Canvas.FillRect(Rect);
+				StringGrid1.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2, StringGrid1.Cells[acol, arow]);
+			end
+	end;
 procedure TForm2.StringGrid1KeyPress(Sender: TObject; var Key: Char);
-begin
-if Key in ['0'..'5'] then
-StringGrid1.Cells[StringGrid1.Col,StringGrid1.Row]:=Key;
-end;
+	begin
+		if Key in ['0'..'5'] then
+		StringGrid1.Cells[StringGrid1.Col,StringGrid1.Row]:=Key;
+	end;
 
 
 procedure TForm2.Button4Click(Sender: TObject);
-var brojac : integer;
-begin
-for brojac:=0 to Ucenici.Items.Count-1
-do
-StringGrid1.Cols[0][brojac+1]:=Ucenici.Items.Strings[brojac];
-end;
+	var brojac : integer;
+	begin
+		for brojac:=0 to Ucenici.Items.Count-1
+			do
+				StringGrid1.Cols[0][brojac+1]:=Ucenici.Items.Strings[brojac];
+			end;
 
 procedure TForm2.Button5Click(Sender: TObject);
-begin
-Ucenici.Items.Add(Edit2.Text);
-StringGrid1.rowCount:=StringGrid1.RowCount+1;
-StringGrid1.Cells[0,StringGrid1.RowCount-1]:=Ucenici.Items.Strings[Ucenici.Items.Count-1];
-end;
+	begin
+		Ucenici.Items.Add(Edit2.Text);
+		StringGrid1.rowCount:=StringGrid1.RowCount+1;
+		StringGrid1.Cells[0,StringGrid1.RowCount-1]:=Ucenici.Items.Strings[Ucenici.Items.Count-1];
+	end;
 
 procedure TForm2.Button6Click(Sender: TObject);
-begin
-DeleteCol(StringGrid1,Ucenici.ItemIndex+1);
-Ucenici.Items.Delete(Ucenici.ItemIndex);
-end;
+	begin
+		DeleteCol(StringGrid1,Ucenici.ItemIndex+1);
+		Ucenici.Items.Delete(Ucenici.ItemIndex);
+	end;
 
 procedure TForm2.sad1Click(Sender: TObject);
-var brojac1,brojac2,brojacjed,brojacnul : integer;
-begin
-brojacjed:=0;
-brojacnul:=0;
-for brojac1:=1 to StringGrid1.RowCount do
-for brojac2:=1 to StringGrid1.ColCount do
-if (StringGrid1.Cells[brojac2,brojac1]='1') then brojacjed:=brojacjed+1
-else if (StringGrid1.Cells[brojac2,brojac1]='0') then brojacnul:=brojacnul+1;
-showmessage('Broj jedinica je : ' + Inttostr(brojacjed)+ ', a broj neocenjenih je '+inttostr(brojacnul));
-end;
+	var brojac1,brojac2,brojacjed,brojacnul : integer;
+	begin
+		brojacjed:=0;
+		brojacnul:=0;
+		for brojac1:=1 to StringGrid1.RowCount do
+		for brojac2:=1 to StringGrid1.ColCount do
+			if (StringGrid1.Cells[brojac2,brojac1]='1') then brojacjed:=brojacjed+1
+			else if (StringGrid1.Cells[brojac2,brojac1]='0') then brojacnul:=brojacnul+1;
+		showmessage('Broj jedinica je : ' + Inttostr(brojacjed)+ ', a broj neocenjenih je '+inttostr(brojacnul));
+	end;
 
 procedure TForm2.asdClick(Sender: TObject);
-var brojac1,brojac2,brojac3 : integer;
-begin
-for brojac1:=1 to StringGrid1.RowCount do
-for brojac2:=1 to StringGrid1.ColCount do
-if (StringGrid1.Cells[brojac2,brojac1]='0') then Neocenjeni.Add(IntToStr(Brojac1));
-for brojac3:=1 to Neocenjeni.Count do showmessage('Ucenik '+StringGrid1.Cells[0,StrToint(Neocenjeni.Strings[brojac3-1])]);
-Neocenjeni.Clear;
-end;
+	var brojac1,brojac2,brojac3 : integer;
+	begin
+		for brojac1:=1 to StringGrid1.RowCount do
+		for brojac2:=1 to StringGrid1.ColCount do
+			if (StringGrid1.Cells[brojac2,brojac1]='0') then Neocenjeni.Add(IntToStr(Brojac1));
+		for brojac3:=1 to Neocenjeni.Count do showmessage('Ucenik '+StringGrid1.Cells[0,StrToint(Neocenjeni.Strings[brojac3-1])]);
+	Neocenjeni.Clear;
+	end;
 
 end.
